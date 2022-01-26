@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+
+resources:
+  repositories:   
+  - repository: templates
+    type: git
+    name: Operações/template-take-blip
+    ref: refs/heads/feature/go-new
+
+extends:
+  template: template-pipeline.yml@templates    
+  parameters:    
+    packagename: lime-go
+    type: go
+    goCmds:
+    - go get -v -t -d ./...
+    - go vet -v .
+    - go build -v .
+    - go test -v .
