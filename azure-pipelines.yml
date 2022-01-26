@@ -24,6 +24,5 @@ extends:
     type: go
     goCmds:
     - go get -v -t -d ./...
-    - go vet -v .
     - go build -v .
     - go test -v .
